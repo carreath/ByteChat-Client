@@ -1,10 +1,12 @@
+package com.carreath.server;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.IOException;
 import java.io.*;
 import java.util.*;
 
-public class ConnectionHandler  implements Runnable{
+public class ConnectionThreadManager implements Runnable{
 	public long lastConnection = System.currentTimeMillis();
 
     protected int          serverPort   = 8080;
@@ -15,7 +17,7 @@ public class ConnectionHandler  implements Runnable{
     private LinkedList<DataOutputStream> outputs = new LinkedList<DataOutputStream>();
     private LinkedList<String> users = new LinkedList<String>();
 
-    public ConnectionHandler (int port){
+    public ConnectionThreadManager (int port){
         this.serverPort = port;
     }
 

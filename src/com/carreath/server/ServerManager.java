@@ -1,13 +1,12 @@
-/* TCPClient.java from Kurose-Ross */
-
+package com.carreath.server;
 import java.io.*;
 import java.net.*;
 
-class ByteChatServer {
+class ServerManager {
 	public static void main(String args[]) {
-		ConnectionHandler  server = null;
+		ConnectionThreadManager  server = null;
 		try {
-			server = new ConnectionHandler (9000);
+			server = new ConnectionThreadManager (25565);
 			new Thread(server).start();
 			while(true) {
 				Thread.sleep(10000);

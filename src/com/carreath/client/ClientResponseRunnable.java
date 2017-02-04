@@ -1,19 +1,19 @@
-import java.io.*;
-import java.net.Socket;
+package com.carreath.client;
 
-public class ClientResponseThread implements Runnable {
+import java.io.*;
+
+public class ClientResponseRunnable implements Runnable {
 	BufferedReader input = null;
 
-    public ClientResponseThread(BufferedReader input) {
+    public ClientResponseRunnable(BufferedReader input) {
         this.input = input;
     }
 
     public void run() {
         try {
-            long time = System.currentTimeMillis();
             while(true) {
                 String message = input.readLine();
-                System.out.println("> " + message);
+                System.out.println(message);
             }
         } catch (IOException e) {
             return;

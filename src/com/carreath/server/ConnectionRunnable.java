@@ -1,5 +1,4 @@
-import java.io.InputStream;
-import java.io.OutputStream;
+package com.carreath.server;
 import java.io.*;
 import java.net.Socket;
 import java.util.*;
@@ -7,7 +6,6 @@ import java.util.*;
 public class ConnectionRunnable implements Runnable{
     private LinkedList<DataOutputStream> outputs = null;
     private LinkedList<String> users = null;
-    private DataOutputStream myOutStream = null;
 
     protected Socket clientSocket = null;
     protected String serverText   = null;
