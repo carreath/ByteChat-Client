@@ -1,4 +1,4 @@
-# ByteChat
+# ByteChat (Currently on localhost only)
 A multi-threaded java chat program using sockets
 
 ## Step 1
