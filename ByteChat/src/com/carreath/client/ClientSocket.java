@@ -10,7 +10,7 @@ class ClientSocket {
 		BufferedReader in = new BufferedReader(new InputStreamReader(whatismyip.openStream()));
 
 		final String ip = in.readLine(); //you get the IP as a String
-		final String serverIP = "47.55.89.28";
+		final String serverIP = ip;
 		final String connectionHost = (ip.equals(serverIP))? "127.0.0.1": serverIP; 
 		final int portNumber = 25565;
 		Scanner sc = new Scanner(System.in);
