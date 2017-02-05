@@ -1,19 +1,20 @@
 package com.carreath.server;
 
+import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.io.IOException;
+import java.net.URL;
 import java.io.*;
 import java.util.*;
 
-public class ConnectionThreadManager implements Runnable{
+public class ConnectionThreadManager implements Runnable {
 	public long lastConnection = System.currentTimeMillis();
-
+	
     protected int          serverPort   = 8080;
     protected ServerSocket serverSocket = null;
     protected boolean      isStopped    = false;
     protected Thread       runningThread= null;
-
+    
     private LinkedList<DataOutputStream> outputs = new LinkedList<DataOutputStream>();
     private LinkedList<String> users = new LinkedList<String>();
 
@@ -61,8 +62,12 @@ public class ConnectionThreadManager implements Runnable{
 
     private void openServerSocket() {
         try {
+    		URL whatismyip = new URL("http://checkip.amazonaws.com");
+    		BufferedReader in = new BufferedReader(new InputStreamReader(whatismyip.openStream()));
+    		final String ip = in.readLine(); //you get the IP as a String
             this.serverSocket = new ServerSocket(this.serverPort);
         } catch (IOException e) {
+        	e.printStackTrace();
             throw new RuntimeException("Cannot open port 8080", e);
         }
     }
