@@ -1,5 +1,8 @@
-# ByteChat (Currently on localhost only)
+# ByteChat 
 A multi-threaded java chat program using sockets
+
+## Known issues to be fixed
+Hardcoded IPs to be fixed -> Working on dedicated servers and dynamic IP lookup
 
 ## Step 1
     -Compile each java file `javac *.java`
