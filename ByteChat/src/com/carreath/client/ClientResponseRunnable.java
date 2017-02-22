@@ -1,6 +1,4 @@
-package com.carreath.client;
-
-import java.io.*;
+package com.carreath.client; import java.io.*;
 
 public class ClientResponseRunnable implements Runnable {
 	BufferedReader input = null;

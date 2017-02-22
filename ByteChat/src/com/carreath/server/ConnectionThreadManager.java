@@ -1,5 +1,4 @@
-package com.carreath.server;
-
+package com.carreath.server; 
 import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
