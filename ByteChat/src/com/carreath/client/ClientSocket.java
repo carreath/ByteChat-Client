@@ -1,4 +1,4 @@
-package com.carreath.client;
+package com.carreath.client; 
 
 import java.io.*;
 import java.net.*;
@@ -10,9 +10,19 @@ class ClientSocket {
 		BufferedReader in = new BufferedReader(new InputStreamReader(whatismyip.openStream()));
 
 		final String ip = in.readLine(); //you get the IP as a String
-		final String serverIP = ip;
+		final String serverIP = (args.length > 0)? args[0]: "127.0.0.1";
+		
+		int port;
+		try {
+			port = Integer.parseInt(args[1]);
+		}
+		catch(Exception e) {
+			port = 25565;
+		}
+
+		final int portNumber = port;
 		final String connectionHost = (ip.equals(serverIP))? "127.0.0.1": serverIP; 
-		final int portNumber = 25565;
+		
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("Creating socket to '" + connectionHost + "' on port " + portNumber);

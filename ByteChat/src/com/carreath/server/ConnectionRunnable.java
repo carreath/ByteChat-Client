@@ -1,5 +1,5 @@
-package com.carreath.server;
-import java.io.*;
+
+package com.carreath.server; import java.io.*;
 import java.net.Socket;
 import java.util.*;
 
@@ -11,6 +11,8 @@ public class ConnectionRunnable implements Runnable{
     protected String serverText   = null;
 
     private String name = "";
+    private DataOutputStream output = null;
+    private BufferedReader input = null;
 
     public ConnectionRunnable(Socket clientSocket, String serverText, LinkedList<DataOutputStream> outputs, LinkedList<String> users) {
         this.clientSocket = clientSocket;
@@ -21,19 +23,14 @@ public class ConnectionRunnable implements Runnable{
 
     public void run() {
         try {
-            DataOutputStream output = new DataOutputStream(clientSocket.getOutputStream());
-            BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            output = new DataOutputStream(clientSocket.getOutputStream());
+            input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
             outputs.add(output);
-            while(true) {
+            while(clientSocket != null) {
                 String message = input.readLine();
                 if(message.equals("END")) {
-                    outputs.remove(output);
-                    clientSocket = null;
-                    message = name + ": Has Left The Channel";
-                    for(int i=0; i<outputs.size(); i++) {
-                        outputs.get(i).writeBytes(">> " + message + "\n"); 
-                    }
+                    disconnect();
                     break;
                 }
 
@@ -53,8 +50,21 @@ public class ConnectionRunnable implements Runnable{
                 }     
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            disconnect();
         }
         System.out.println("User: " + name + " Disconnected");
+    }
+
+    private void disconnect() {
+        try {
+            outputs.remove(output);
+            users.remove(name.toUpperCase());        
+            String message = name + ": Has Left The Channel";
+            for(int i=0; i<outputs.size(); i++) {
+                outputs.get(i).writeBytes(">> " + message + "\n"); 
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
