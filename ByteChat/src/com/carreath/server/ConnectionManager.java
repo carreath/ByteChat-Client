@@ -1,4 +1,5 @@
 package com.carreath.server; 
+
 import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -6,7 +7,7 @@ import java.net.URL;
 import java.io.*;
 import java.util.*;
 
-public class ConnectionThreadManager implements Runnable {
+public class ConnectionManager implements Runnable {
 	public long lastConnection = System.currentTimeMillis();
 	
     protected int          serverPort   = 8080;
@@ -17,7 +18,7 @@ public class ConnectionThreadManager implements Runnable {
     private LinkedList<DataOutputStream> outputs = new LinkedList<DataOutputStream>();
     private LinkedList<String> users = new LinkedList<String>();
 
-    public ConnectionThreadManager (int port){
+    public ConnectionManager (int port){
         this.serverPort = port;
     }
 
@@ -39,7 +40,7 @@ public class ConnectionThreadManager implements Runnable {
                 throw new RuntimeException(
                     "Error accepting client connection", e);
             }
-            new Thread(new ConnectionRunnable(clientSocket, "Multithreaded Server", outputs, users)).start();
+            new Thread(new ConnectionThread(clientSocket, "Multithreaded Server", outputs, users)).start();
             lastConnection = System.currentTimeMillis();
         }
         System.out.println("Server Stopped.") ;

@@ -1,9 +1,10 @@
+package com.carreath.server; 
 
-package com.carreath.server; import java.io.*;
+import java.io.*;
 import java.net.Socket;
 import java.util.*;
 
-public class ConnectionRunnable implements Runnable{
+public class ConnectionThread implements Runnable{
     private LinkedList<DataOutputStream> outputs = null;
     private LinkedList<String> users = null;
 
@@ -14,7 +15,7 @@ public class ConnectionRunnable implements Runnable{
     private DataOutputStream output = null;
     private BufferedReader input = null;
 
-    public ConnectionRunnable(Socket clientSocket, String serverText, LinkedList<DataOutputStream> outputs, LinkedList<String> users) {
+    public ConnectionThread(Socket clientSocket, String serverText, LinkedList<DataOutputStream> outputs, LinkedList<String> users) {
         this.clientSocket = clientSocket;
         this.serverText   = serverText;
         this.outputs = outputs;

@@ -1,12 +1,13 @@
-package com.carreath.server; 
+package com.carreath.server;
+
 import java.io.*;
 import java.net.*;
 
 class ServerManager {
 	public static void main(String args[]) {
-		ConnectionThreadManager  server = null;
+		ConnectionManager  server = null;
 		try {
-			server = new ConnectionThreadManager (25565);
+			server = new ConnectionManager (25565);
 			new Thread(server).start();
 			while(true) {
 				Thread.sleep(10000);
