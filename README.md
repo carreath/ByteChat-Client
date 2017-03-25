@@ -16,6 +16,15 @@ Hardcoded IPs to be fixed -> Working on dedicated servers and dynamic IP lookup
 ## Using the client
     -Clients must have a uniques identifier
 
+    -Join a room with the command
+    	"!CONNECT <id>" where <id> is (0, 1, or 2)
+
+    -Leave a room with the command
+    	"!DISCONNECT"
+
+    -Close ByteChat from anywhere
+    	"!CLOSE"
+
     -Type in the command prompt and press enter to send a message
 
 ## Leaving a conversation

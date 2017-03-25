@@ -7,27 +7,27 @@ import java.net.URL;
 import java.io.*;
 import java.util.*;
 
-public class ConnectionManager implements Runnable {
-	public long lastConnection = System.currentTimeMillis();
-	
-    protected int          serverPort   = 8080;
+public class ServerThread implements Runnable {	
+    protected int          serverPort   = 25565;
     protected ServerSocket serverSocket = null;
     protected boolean      isStopped    = false;
     protected Thread       runningThread= null;
     
-    private LinkedList<DataOutputStream> outputs = new LinkedList<DataOutputStream>();
-    private LinkedList<String> users = new LinkedList<String>();
+    private LinkedList<ChatRoom> rooms;
 
-    public ConnectionManager (int port){
+    //Constructor accepts server port otherwise it defaults to 25565
+    public ServerThread (int port, LinkedList<ChatRoom> rooms){
         this.serverPort = port;
+        this.rooms = rooms;
     }
 
+    //Run method manages the open socket and creates client threads when needed
     public void run(){
         synchronized(this){
             this.runningThread = Thread.currentThread();
         }
         openServerSocket();
-        while(! isStopped()){
+        while(!isStopped()){
             Socket clientSocket = null;
             try {
             	System.out.println("Waiting for connection");
@@ -40,8 +40,7 @@ public class ConnectionManager implements Runnable {
                 throw new RuntimeException(
                     "Error accepting client connection", e);
             }
-            new Thread(new ConnectionThread(clientSocket, "Multithreaded Server", outputs, users)).start();
-            lastConnection = System.currentTimeMillis();
+            new User(clientSocket, rooms).setRooms(rooms);
         }
         System.out.println("Server Stopped.") ;
     }
