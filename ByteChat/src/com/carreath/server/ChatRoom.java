@@ -14,7 +14,7 @@ public class ChatRoom implements Runnable{
             //Loops while the current user is still connected
         	while(true) {
         		LinkedList<User> s_users = (LinkedList<User>) getUsers().clone();
-        		for(User user : s_users) {   
+        		for(User user : s_users) {  
 	            	//read input from the user
         			if(!user.getInput()) disconnect(user);
 	                LinkedList<String> buffer = user.getBuffer();
@@ -53,7 +53,7 @@ public class ChatRoom implements Runnable{
     	try {
 			user.writeBytes("Welcome");
 			for(User user2 : users) {
-            	user2.writeBytes(user.getName() + " Has Joined The Lobby");
+            	user2.writeBytes("### '" + user.getName() + "' Has Connected.");
             }
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

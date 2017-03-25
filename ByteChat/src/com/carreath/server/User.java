@@ -27,6 +27,7 @@ public class User {
 	        input = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
 
 			name = input.readLine();
+			System.out.println("Got Name " + name);
         } catch (IOException e) {
 	        isConnected = false;
 	    }
