@@ -1,7 +1,7 @@
 package com.carreath.client; import java.io.*;
 
 public class ClientResponseRunnable implements Runnable {
-	BufferedReader input = null;
+	private BufferedReader input = null;
 
     public ClientResponseRunnable(BufferedReader input) {
         this.input = input;
@@ -14,6 +14,7 @@ public class ClientResponseRunnable implements Runnable {
                 System.out.println(message);
             }
         } catch (IOException e) {
+            System.out.println(e.getStackTrace());
             return;
         }
     }
