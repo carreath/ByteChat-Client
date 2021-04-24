@@ -1,8 +1,8 @@
 # ByteChat 
 A multi-threaded java chat program using sockets
 
-## Known issues to be fixed
-Hardcoded IPs to be fixed -> Working on dedicated servers and dynamic IP lookup
+# Unmaintained
+This repository is unmaintained. Although I am planning on revisiting this type of project again.
 
 ## Step 1
     -Compile each java file `javac *.java`
