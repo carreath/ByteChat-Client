@@ -1,5 +1,8 @@
 # ByteChat 
-A multi-threaded java chat program using sockets
+A multi-threaded java chat program using sockets.
+I made this project to further dive deeper into internet architecture and practice working with and building my own communication software.
+
+I have also implemented my first attempt at public key cryptography. This part of the project was very finicky, but I was successfully able to create private and public keys for two users who wish to communicate through the text chat. 
 
 # Unmaintained
 This repository is unmaintained. Although I am planning on revisiting this type of project again.
